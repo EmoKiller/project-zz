@@ -1,0 +1,8 @@
+C:\Users\Acer\Desktop\GreenAcemdy\BaiTapj\project-z\project-z\project-z\bin\Debug\project-z.exe.config
+C:\Users\Acer\Desktop\GreenAcemdy\BaiTapj\project-z\project-z\project-z\bin\Debug\project-z.exe
+C:\Users\Acer\Desktop\GreenAcemdy\BaiTapj\project-z\project-z\project-z\bin\Debug\project-z.pdb
+C:\Users\Acer\Desktop\GreenAcemdy\BaiTapj\project-z\project-z\project-z\obj\Debug\project-z.csproj.AssemblyReference.cache
+C:\Users\Acer\Desktop\GreenAcemdy\BaiTapj\project-z\project-z\project-z\obj\Debug\project-z.csproj.SuggestedBindingRedirects.cache
+C:\Users\Acer\Desktop\GreenAcemdy\BaiTapj\project-z\project-z\project-z\obj\Debug\project-z.csproj.CoreCompileInputs.cache
+C:\Users\Acer\Desktop\GreenAcemdy\BaiTapj\project-z\project-z\project-z\obj\Debug\project-z.exe
+C:\Users\Acer\Desktop\GreenAcemdy\BaiTapj\project-z\project-z\project-z\obj\Debug\project-z.pdb
