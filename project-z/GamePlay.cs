@@ -20,7 +20,8 @@ namespace project_z
                 return _instance;
             }
         }
-        private int round = 1;
+        
+        private int Page = 1;
         private int minOfEnemy = 1;
         private int maxOfEnemy = 1;
         private int countEnemyDead = 0;
@@ -31,11 +32,28 @@ namespace project_z
         {
             ResetGame();
             Console.Clear();
+            //option player
+            //PlayerOption();
             Console.WriteLine("Game Start");
+            StartPage();
+        }
+        private void PlayerOption()
+        {
+            UIElement[] elements = new UIElement[3];
+            elements[1] = new UIElement("1","Show Infomation", null);
+
+            UIManager.Instance.PrintMenu("Player Option", elements);
+        }
+        private void StartPage()
+        {
             while (GameManager.Instance.player.Alive)
             {
-                RoundUpdate();
+                Console.WriteLine($"Page: {Page}");
+                PageUpdate();
                 CreatedEnemy();
+                ShowEnemies();
+                Console.WriteLine("Press start Round");
+                Console.ReadKey();
                 StartRound();
             }
             GameOver();
@@ -47,7 +65,6 @@ namespace project_z
             while (GameManager.Instance.player.Alive && enemyAllAlive)
             {
                 Console.WriteLine($"turn {countTurn}");
-                ShowEnemies();
                 TurnPlayer();
                 EnemyAttack();
                 CheckEnemyDead();
@@ -55,43 +72,26 @@ namespace project_z
                 Console.ReadKey();
                 Console.Clear();
             }
+            Page++;
+            countEnemyDead = 0;
         }
         private void TurnPlayer()
         {
-            Console.Clear();
-            Console.WriteLine($"turn Player Attack");
             while (GameManager.Instance.player.Alive)
             {
-                //int x = GameUtilities.GetRandomValue(0, enemies.Length);
-                //if (!enemies[x].Alive)
-                //{
-                //    continue;
-                //}
-                //else
-                //{
-                //    GameManager.Instance.player.Attack(enemies[x]);
-                //    Console.WriteLine("Player Attack");
-                //    if (!enemies[x].Alive)
-                //    {
-                //        //drop items
-                //        GameManager.Instance.player.GainExp(enemies[x].Exp);
-                //    }
-                //    Console.WriteLine($"End turn Player");
-                //    break;
-                //}
                 ChooseEnemy();
+                break;
             }
         }
         private void ChooseEnemy()
         {
-            Console.Clear();
             UIElement[] element = new UIElement[enemies.Length+1];
             for (int i = 0; i < enemies.Length; i++)
             {
                 int x = i + 1;
-                int y = i;
-                Console.WriteLine("vong lap i hien tai la:" + i);
-                element[x] = new UIElement(x.ToString(), enemies[i].TypeName +" "+ i ,() => { PlayerAttack(enemies[i]); });
+                //int y = i;
+                Console.WriteLine(i);
+                element[x] = new UIElement(x.ToString(), enemies[i].TypeName,() => { PlayerAttack(enemies[i-1]); });
                 enemies[i].ShowInFomation();
             }
             element[0] = new UIElement("0","Back",null);
@@ -99,13 +99,20 @@ namespace project_z
         }
         private void PlayerAttack(Enemy enemy)
         {
-            GameManager.Instance.player.Attack(enemy);
+            Console.Clear();
             Console.WriteLine("Player Attack");
+            GameManager.Instance.player.Attack(enemy);
             if (!enemy.Alive)
             {
                 //drop items
+                Console.WriteLine("Player Gain Exp + " + enemy.Exp);
                 GameManager.Instance.player.GainExp(enemy.Exp);
             }
+            //else
+            //{
+            //    Console.WriteLine("Enemy: " + enemy.ShowDeadAlive());
+                
+            //}
             Console.WriteLine($"End turn Player");
         }
         private void EnemyAttack()
@@ -153,7 +160,6 @@ namespace project_z
             {
                 enemy.ShowInFomation();
             }
-            Console.ReadKey();
         }
         private void GameOver()
         {
@@ -169,20 +175,20 @@ namespace project_z
             Console.ReadKey();
             GameManager.Instance.ShowMainMenu();
         }
-        private void RoundUpdate()
+        private void PageUpdate()
         {
-            if (round % 2 == 0)
+            if (Page % 2 == 0)
             {
                 maxOfEnemy++;
             }
-            else if (round % 5 == 0)
+            else if (Page % 5 == 0)
             {
                 minOfEnemy++;
             }
         }
         private void ResetGame()
         {
-            round = 1;
+            Page = 1;
             minOfEnemy = 1;
             maxOfEnemy = 1;
         }

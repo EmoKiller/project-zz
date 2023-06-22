@@ -28,41 +28,42 @@ namespace project_z
             exp += gainExp;
             UpLevel(exp);
         }
-        public void UpLevel(int exp)
+        private void UpLevel(int exp)
         {
-            if (exp == expRequired)
+            if (exp >= expRequired)
             {
                 Console.WriteLine("Level Up");
                 level++;
                 BonusUpLevel();
-                expRequired *= 2;
-                damage += 2;
-                hp += 2;
-                currentHp = hp;
+                ExpRequired();
+                UpDamage(2);
+                UpHealth(2);
+                HealthFull();
             }
         }
-        private static void BonusUpLevel()
+        private void BonusUpLevel()
         {
-            Console.WriteLine("1: Upgrade Damage + 4");
-            Console.WriteLine("2: Upgrade Health + 10");
-            Console.WriteLine("3: Upgrade ? + 4");
-            ConsoleKeyInfo key = Console.ReadKey();
-            string strKey = Convert.ToString(key.Key);
-            switch (strKey)
-            {
-                case "1":
-                case "NumPad1":
-                    Console.WriteLine("Press 1");
-                    break;
-                case "2":
-                case "NumPad2":
-                    Console.WriteLine("Press 2");
-                    break;
-                case "3":
-                case "NumPad3":
-                    Console.WriteLine("Press 3");
-                    break;
-            }
+            UIElement[] element = new UIElement[3];
+            element[0] = new UIElement("1", "Upgrade Damage + 4", () => { UpDamage(4); });
+            element[1] = new UIElement("2", "Upgrade Health + 10", () => { UpHealth(4); });
+            element[2] = new UIElement("3", "Health full Hp", HealthFull );
+            UIManager.Instance.PrintMenu("Choose", element);
+        }
+        private void UpDamage(int num)
+        {
+            damage += num;
+        }
+        private void UpHealth(int num)
+        {
+            hp += num;
+        }
+        private void HealthFull()
+        {
+            currentHp = hp;
+        }
+        private void ExpRequired()
+        {
+            expRequired *= 2;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace project_z
             hp = 50;
             currentHp = hp;
             damage = GameUtilities.GetRandomValue(5, 10);
-            exp = GameUtilities.GetRandomValue(1,5);
+            exp = GameUtilities.GetRandomValue(2,5);
             attackSpeed = 1;
         }
         public override void ShowInFomation()

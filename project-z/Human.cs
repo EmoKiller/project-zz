@@ -38,6 +38,7 @@ namespace project_z
         {
             target.TakeDamage(damage);
             Console.WriteLine("Damage: " + damage + " To " + target.typeName);
+            Console.WriteLine("Current HP Enemy: " + target.currentHp);
         }
         public void TakeDamage(int damage)
         {
