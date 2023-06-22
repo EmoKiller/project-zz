@@ -32,20 +32,13 @@ namespace project_z
         {
             ResetGame();
             Console.Clear();
-            //option player
-            //PlayerOption();
-            Console.WriteLine("Game Start");
             StartPage();
         }
-        private void PlayerOption()
-        {
-            UIElement[] elements = new UIElement[3];
-            elements[1] = new UIElement("1","Show Infomation", null);
-
-            UIManager.Instance.PrintMenu("Player Option", elements);
-        }
+        
         private void StartPage()
         {
+            Console.Clear();
+            Console.WriteLine("Game Start");
             while (GameManager.Instance.player.Alive)
             {
                 Console.WriteLine($"Page: {Page}");
@@ -94,8 +87,23 @@ namespace project_z
                 element[x] = new UIElement(x.ToString(), enemies[i].TypeName,() => { PlayerAttack(enemies[i-1]); });
                 enemies[i].ShowInFomation();
             }
-            element[0] = new UIElement("0","Back",null);
+            element[0] = new UIElement("0","Option", Option);
             UIManager.Instance.PrintMenu("turn Player Attack", element);
+        }
+        public void Option()
+        {
+            UIElement[] elements = new UIElement[4];
+            elements[1] = new UIElement("1", "Show Infomation",
+                () =>
+                {
+                    GameManager.Instance.player.ShowInFomation();
+                    Console.ReadKey();
+                    Option();
+                });
+            elements[2] = new UIElement("2", "Inventory", null);
+            elements[3] = new UIElement("3", "Skill", null);
+            elements[0] = new UIElement("0", "Back", ChooseEnemy);
+            UIManager.Instance.PrintMenu("Player Option", elements);
         }
         private void PlayerAttack(Enemy enemy)
         {
