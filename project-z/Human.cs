@@ -23,6 +23,7 @@ namespace project_z
         public int CurrentHp => currentHp;
         public bool Alive => currentHp > 0;
         public int Exp => exp;
+        public int Level => level;
         public string TypeName => typeName;
         public Human()
         {

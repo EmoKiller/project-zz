@@ -20,7 +20,7 @@ namespace project_z
                 return _instance;
             }
         }
-        
+        private int levelEnemy = 1;
         private int Page = 1;
         private int minOfEnemy = 1;
         private int maxOfEnemy = 1;
@@ -78,13 +78,14 @@ namespace project_z
         }
         private void ChooseEnemy()
         {
+            Console.Clear();
             UIElement[] element = new UIElement[enemies.Length+1];
             for (int i = 0; i < enemies.Length; i++)
             {
                 int x = i + 1;
                 //int y = i;
                 Console.WriteLine(i);
-                element[x] = new UIElement(x.ToString(), enemies[i].TypeName + " Hp:" + enemies[i].CurrentHp,
+                element[x] = new UIElement(x.ToString(), enemies[i].TypeName + " Level: " + enemies[i].Level + " Hp:" + enemies[i].CurrentHp,
                     () => { PlayerAttack(enemies[i-1]); });
                 enemies[i].ShowInFomation();
             }
@@ -93,10 +94,12 @@ namespace project_z
         }
         public void Option()
         {
+            Console.Clear();
             UIElement[] elements = new UIElement[4];
             elements[1] = new UIElement("1", "Show Infomation",
                 () =>
                 {
+                    Console.Clear();
                     GameManager.Instance.player.ShowInFomation();
                     Console.ReadKey();
                     Option();
@@ -117,11 +120,6 @@ namespace project_z
                 Console.WriteLine("Player Gain Exp + " + enemy.Exp);
                 GameManager.Instance.player.GainExp(enemy.Exp);
             }
-            //else
-            //{
-            //    Console.WriteLine("Enemy: " + enemy.ShowDeadAlive());
-                
-            //}
             Console.WriteLine($"End turn Player");
         }
         private void EnemyAttack()
@@ -154,7 +152,7 @@ namespace project_z
             enemies = new Enemy[GameUtilities.GetRandomValue(minOfEnemy,maxOfEnemy)];
             for (int i = 0; i < enemies.Length; i++)
             {
-                Enemy enemy = new Enemy();
+                Enemy enemy = new Enemy(levelEnemy);
                 enemies[i] = enemy;
                 Thread.Sleep(20);
             }
@@ -193,6 +191,8 @@ namespace project_z
             else if (Page % 5 == 0)
             {
                 minOfEnemy++;
+                levelEnemy++;
+                
             }
         }
         private void ResetGame()
@@ -200,6 +200,7 @@ namespace project_z
             Page = 1;
             minOfEnemy = 1;
             maxOfEnemy = 1;
+            levelEnemy = 1;
         }
     }
 }
