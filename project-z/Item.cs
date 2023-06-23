@@ -10,19 +10,26 @@ namespace project_z
     {
         protected int id;
         protected int damage;
+        protected int magicDamage;
+        protected int critical;
         
         protected string type;
+
         protected bool requiredLevel;
 
         public int ItemID => id;
         public Item() 
         {
             id = GetHashCode();
+            type = GetType().Name;
         }
 
-        public void ShowItem()
+        public virtual void ShowItem()
         {
-
+            UIManager.Instance.PrintLine(30, "=");
+            Console.WriteLine("Item ID: " + id);
+            Console.WriteLine("Type: " + type);
+            UIManager.Instance.PrintLine(30, "=");
         }
 
 

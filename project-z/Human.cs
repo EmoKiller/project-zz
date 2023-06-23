@@ -10,12 +10,17 @@ namespace project_z
     {
         protected int level;
         protected int hp;
+        protected int mp;
         protected int currentHp;
+        protected int currentMp;
         protected int damage;
+        protected int magicDamage;
+        protected int critical;
         protected int attackSpeed = 1;
         protected int exp;
         protected string typeName;
 
+        public int CurrentHp => currentHp;
         public bool Alive => currentHp > 0;
         public int Exp => exp;
         public string TypeName => typeName;
@@ -30,6 +35,8 @@ namespace project_z
             Console.WriteLine("Level: " + level);
             Console.WriteLine("HP: " + hp);
             Console.WriteLine("current Hp: " + currentHp);
+            Console.WriteLine("MP: " + mp);
+            Console.WriteLine("current Mp: " + currentMp);
             Console.WriteLine("damage: " + damage);
             Console.WriteLine("Attack Speed: " + attackSpeed);
             UIManager.Instance.PrintLine(30, "=");
@@ -38,7 +45,7 @@ namespace project_z
         {
             target.TakeDamage(damage);
             Console.WriteLine("Damage: " + damage + " To " + target.typeName);
-            Console.WriteLine("Current HP Enemy: " + target.currentHp);
+            Console.WriteLine($"Current HP {target.typeName} : " + target.currentHp);
         }
         public void TakeDamage(int damage)
         {

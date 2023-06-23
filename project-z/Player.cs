@@ -8,7 +8,7 @@ namespace project_z
 {
     public class Player : Human
     {
-        public string hero;
+        protected string hero;
 
         protected int expRequired = 2;
         public Player() : base()

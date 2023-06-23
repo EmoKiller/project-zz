@@ -84,7 +84,8 @@ namespace project_z
                 int x = i + 1;
                 //int y = i;
                 Console.WriteLine(i);
-                element[x] = new UIElement(x.ToString(), enemies[i].TypeName,() => { PlayerAttack(enemies[i-1]); });
+                element[x] = new UIElement(x.ToString(), enemies[i].TypeName + " Hp:" + enemies[i].CurrentHp,
+                    () => { PlayerAttack(enemies[i-1]); });
                 enemies[i].ShowInFomation();
             }
             element[0] = new UIElement("0","Option", Option);
