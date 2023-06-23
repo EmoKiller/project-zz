@@ -9,6 +9,7 @@ namespace project_z
 {
     public class Enemy : Human
     {
+
         public Enemy(int level) : base()
         {
             hp = 50;
@@ -26,9 +27,9 @@ namespace project_z
         }
         private void AttributeChangeByLevel()
         {
-            hp = hp * level;
-            damage = damage * level;
-            exp = exp * level;
+            hp *= level;
+            damage *= level;
+            exp *= level;
         }
 
 

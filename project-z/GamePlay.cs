@@ -25,6 +25,7 @@ namespace project_z
         private int minOfEnemy = 1;
         private int maxOfEnemy = 1;
         private int countEnemyDead = 0;
+        private int totalEnemyDead = 0;
         private bool enemyAllAlive = false;
         private Enemy[] enemies = null;
         private GamePlay() { }
@@ -83,10 +84,13 @@ namespace project_z
             for (int i = 0; i < enemies.Length; i++)
             {
                 int x = i + 1;
-                //int y = i;
+                int y = i;
                 Console.WriteLine(i);
                 element[x] = new UIElement(x.ToString(), enemies[i].TypeName + " Level: " + enemies[i].Level + " Hp:" + enemies[i].CurrentHp,
-                    () => { PlayerAttack(enemies[i-1]); });
+                    () => 
+                    {
+                        PlayerAttack(enemies[y]);
+                    });
                 enemies[i].ShowInFomation();
             }
             element[0] = new UIElement("0","Option", Option);
@@ -130,6 +134,7 @@ namespace project_z
                 if (!enemy.Alive)
                 {
                     countEnemyDead++;
+                    totalEnemyDead++;
                     continue;
                 }
                 else
@@ -170,7 +175,16 @@ namespace project_z
         }
         private void GameOver()
         {
+            Console.Clear();
             Console.WriteLine("Game Over");
+            WinnerLoses();
+            Console.ReadKey();
+            Scores();
+            Console.ReadKey();
+            GameManager.Instance.ShowMainMenu();
+        }
+        private void WinnerLoses()
+        {
             if (GameManager.Instance.player.Alive)
             {
                 Console.WriteLine("Player Winner");
@@ -179,8 +193,12 @@ namespace project_z
             {
                 Console.WriteLine("Player loses");
             }
-            Console.ReadKey();
-            GameManager.Instance.ShowMainMenu();
+        }
+        private void Scores()
+        {
+            Console.Clear();
+            Console.WriteLine("==============SCORES=============");
+            Console.WriteLine("Total Kill Enemy: " + totalEnemyDead);
         }
         private void PageUpdate()
         {
